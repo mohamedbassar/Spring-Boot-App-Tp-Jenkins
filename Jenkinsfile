@@ -1,4 +1,5 @@
 pipeline {
+
     agent any
 
     stages {
@@ -25,6 +26,13 @@ pipeline {
             steps {
                 sh 'mvn -B package'
             }
+        }
+    }
+
+    post {
+
+        success {
+            archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
         }
     }
 }
